@@ -75,9 +75,9 @@ CREATE TABLE Device_Typ
 	idDevice_Typ INT NOT NULL AUTO_INCREMENT
     ,fk_idLieferant INT NOT NULL
     ,deviceType VARCHAR(45)
-    ,deviceDescription VARCHAR(45)
+    ,beschreibung VARCHAR(45)
     ,isVirtual TINYINT(4)
-    ,price DECIMAL
+    ,preis DECIMAL(4,0)
     ,PRIMARY KEY (idDevice_Typ)
     ,FOREIGN KEY (fk_idLieferant)
     REFERENCES Lieferant (idLieferant)
@@ -105,11 +105,11 @@ CREATE TABLE Log
 (
 	idLog INT NOT NULL AUTO_INCREMENT
 	,fk_idDevice INT NOT NULL
-    ,logMsg VARCHAR(45)
+    ,logMsg VARCHAR(45) NOT NULL
     ,severity TINYINT(4)
-    ,loggingTime DATETIME
-    ,checked TINYINT(4)
-    ,zeit TIMESTAMP(1)
+    ,loggingTime DATETIME NOT NULL
+    ,checked TINYINT(4) 
+    ,zeit TIMESTAMP(1) NOT NULL
     ,LogCol VARCHAR(45)
 	,PRIMARY KEY (idLog)
     ,FOREIGN KEY (fk_idDevice)
@@ -164,15 +164,14 @@ CREATE TABLE PoD_Kontaktperson
 CREATE TABLE VLan
 ( 
 	idVLan INT NOT NULL AUTO_INCREMENT
-    ,locationName VARCHAR(45)
-    ,fk_idAddress INT NOT NULL
-    ,fk_idPOD INT NOT NULL
+    ,bezeichnung VARCHAR(45) NOT NULL
+    ,net_address VARCHAR(20)
+    ,subnetmask VARCHAR(20)
+    ,standard_gateway VARCHAR(20)
+    ,fk_idLocation INT NOT NULL
     ,PRIMARY KEY (idVLan)
-    ,FOREIGN KEY (fk_idAddress)
-    REFERENCES Adresse (idAdresse)
-    ON UPDATE CASCADE
-    ,FOREIGN KEY (fk_idPOD)
-    REFERENCES POD (idPOD)
+    ,FOREIGN KEY (fk_idLocation)
+    REFERENCES Location (idLocation)
     ON UPDATE CASCADE
 );
 
@@ -207,9 +206,9 @@ CREATE TABLE Netzwerkinterface_vlan
     
 );
 
-CREATE TABLE SNMP_Comunity
+CREATE TABLE SNMP_Community
 (
-	idSNMP_Comunity INT NOT NULL AUTO_INCREMENT
+	idSNMP_Community INT NOT NULL AUTO_INCREMENT
     ,name VARCHAR(45)
     ,PRIMARY KEY (idSNMP_Comunity)
 );
@@ -224,7 +223,7 @@ CREATE TABLE Admin_Cred_SNMP
     REFERENCES Administrative_Credentials (idAdministrative_Credentials)
     ON UPDATE CASCADE
     ,FOREIGN KEY (fk_SNMP)
-    REFERENCES SNMP_Communitiy (idSNMP_Comunitiy)
+    REFERENCES SNMP_Community (idSNMP_Comunity)
     ON UPDATE CASCADE
 );
 
