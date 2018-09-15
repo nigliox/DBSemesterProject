@@ -244,5 +244,25 @@ INSERT INTO lieferant_hersteller
 VALUES
 (1,1);
 
+<<<<<<< HEAD
+=======
+#Admin_Cred_SNMP hinzufuegen
+INSERT INTO admin_cred_snmp
+(fk_admin_cred,fk_snmp)
+VALUES
+(1,1);
+
+#SNMP Community hinzufuegen
+
+INSERT INTO snmp_community
+(name) VALUE ('DBCommunity');
+
+#Administrative Credentials hinzufuegen
+
+INSERT INTO administrative_credentials
+(benutzer,passwort)
+VALUES 
+('admin','Hallo2018!!');
+>>>>>>> e681e22a23a1d4edf7cb0edd8f63575afb1fe949
 
 
