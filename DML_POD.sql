@@ -1,4 +1,5 @@
 USE inventarisierungslösung;
+
 #LokaleSets Kunde
 
 set @nik = (SELECT idKunde FROM kunde WHERE kunde.name = 'Nik');
@@ -7,18 +8,10 @@ set @Flo = (SELECT idKunde FROM kunde WHERE kunde.name = 'Flo');
 set @Fer = (SELECT idKunde FROM kunde WHERE kunde.name = 'Fer');
 
 #LokaleSets Adresse
-set @AdresseNik = (SELECT idAdresse FROM adresse WHERE ;
+set @AdresseNik = (SELECT idAdresse FROM Adresse INNER JOIN kunde ON adresse.idAdresse = kunde.idKunde WHERE kunde.name = 'Nik');
 set @AdresseMarina = (SELECT idAdresse FROM Adresse INNER JOIN kunde ON adresse.idAdresse = kunde.idKunde WHERE kunde.name = 'Marina');
 set @AdresseFlo = (SELECT idAdresse FROM Adresse INNER JOIN kunde ON adresse.idAdresse = kunde.idKunde WHERE kunde.name = 'Flo');
 set @AdresseFer = (SELECT idAdresse FROM Adresse INNER JOIN kunde ON adresse.idAdresse = kunde.idKunde WHERE kunde.name = 'Fer');
-
-
-
-#LokaleSets PoD
-set @PoDNik = (SELECT idPod FROM Pod INNER JOIN kunde ON pod.idPOD = kunde.idKunde WHERE kunde.name = 'Nik');
-set @PoDMarina = (SELECT idKunde FROM Kunde INNER JOIN pod ON kunde.idKunde = pod.fk_idKunde WHERE kunde.name = 'Marina');
-set @PoDFlo = (SELECT idKunde FROM Kunde INNER JOIN pod ON kunde.idKunde = pod.fk_idKunde WHERE kunde.name = 'Flo');
-set @PoDNik = (SELECT idKunde FROM Kunde INNER JOIN pod ON kunde.idKunde = pod.fk_idKunde WHERE kunde.name = 'Fer');
 
 
 
@@ -52,16 +45,7 @@ INSERT INTO pod
 VALUES
 ('Europa',@Fer,'TestPod4','test4.ch','8.8.8.9','84.102.99.101');
 
-SELECT * FROM pod;
 
-DELETE FROM pod WHERE idPod = 9;
 
 #Location hinzufuegen
 
-INSERT INTO location
-(locationName, fk_idAdresse,fk_idPod)
-
-VALUES
-('Sargans',@AdresseNik,@PodNik);
-
-SELECT idAdresse FROM Adresse INNER JOIN kunde ON adresse.idAdresse = kunde.idKunde WHERE kunde.name = 'Marina';
