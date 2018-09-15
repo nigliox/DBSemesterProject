@@ -245,6 +245,21 @@ VALUES
 (1,1);
 
 #Admin_Cred_SNMP hinzufuegen
+INSERT INTO admin_cred_snmp
+(fk_admin_cred,fk_snmp)
+VALUES
+(1,1);
 
-in
+#SNMP Community hinzufuegen
+
+INSERT INTO snmp_community
+(name) VALUE ('DBCommunity');
+
+#Administrative Credentials hinzufuegen
+
+INSERT INTO administrative_credentials
+(benutzer,passwort)
+VALUES 
+('admin','Hallo2018!!');
+
 
