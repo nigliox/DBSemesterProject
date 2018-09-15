@@ -116,7 +116,7 @@ CREATE TABLE Log
 (
 	idLog INT NOT NULL AUTO_INCREMENT
 	,fk_idDevice INT NOT NULL
-    ,logMsg VARCHAR(45) NOT NULL
+    ,logMsg VARCHAR(255) NOT NULL
     ,severity TINYINT(4)
     ,loggingTime DATETIME NOT NULL
     ,checked TINYINT(4) 
@@ -318,13 +318,6 @@ CREATE TABLE Device_Admin
     ON UPDATE CASCADE
 );
 
-
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 16b9a2fdc9bebbc37e85d86fc9448a373681c1ae
 
 
 
