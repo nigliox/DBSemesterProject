@@ -24,6 +24,12 @@ VALUES ("SeineStrasse",334,9001,"St. Gallen","Schweiz");
 INSERT INTO adresse (strasse, hausnummer,plz,ort,land) 
 VALUES ("Strasse",22,9443,"Widnau","Schweiz");
 
+#Adresse Lieferant hinzufuegen
+
+INSERT INTO adresse (strasse, hausnummer,plz,ort,land) 
+VALUES ("BlindvorWutStrasse",22,9443,"Widnau","Schweiz");
+
+
 set @AdresseNik = (SELECT idAdresse FROM Adresse INNER JOIN kunde ON adresse.idAdresse = kunde.idKunde WHERE kunde.name = 'Nik');
 set @AdresseMarina = (SELECT idAdresse FROM Adresse INNER JOIN kunde ON adresse.idAdresse = kunde.idKunde WHERE kunde.name = 'Marina');
 set @AdresseFlo = (SELECT idAdresse FROM Adresse INNER JOIN kunde ON adresse.idAdresse = kunde.idKunde WHERE kunde.name = 'Flo');
@@ -148,6 +154,95 @@ VALUES (3,3);
 
 INSERT INTO Rechnung_Zahlung (fk_idZahlung, fk_idRechnung)
 VALUES (4,4);
+
+
+
+#Person hinzufuegen
+
+INSERT INTO Person
+(vorname, nachname, mobil, mail)
+VALUES
+('Fernando','Maniglio','+4178753890','mail@mail.ch');
+
+INSERT INTO Person
+(vorname, nachname, mobil, mail)
+VALUES
+('Marina','Scherrer','+4178753890','mail@mail.ch');
+
+INSERT INTO Person
+(vorname, nachname, mobil, mail)
+VALUES
+('Besnik','Istrefi','+4178753890','mail@mail.ch');
+
+INSERT INTO Person
+(vorname, nachname, mobil, mail)
+VALUES
+('Florian','Gämperli','+4178753890','mail@mail.ch');
+
+# Pod_Kontaktpersonen hinzufuegen
+
+INSERT INTO pod_kontaktperson
+(fk_idPoD,fk_idPerson,priority)
+VALUES
+(1,3,10);
+
+INSERT INTO pod_kontaktperson
+(fk_idPoD,fk_idPerson,priority)
+VALUES
+(2,2,10);
+
+INSERT INTO pod_kontaktperson
+(fk_idPoD,fk_idPerson,priority)
+VALUES
+(3,4,10);
+
+INSERT INTO pod_kontaktperson
+(fk_idPoD,fk_idPerson,priority)
+VALUES
+(4,1,10);
+
+#VLan hinzufuegen
+
+INSERT INTO vlan
+(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
+VALUES
+('vlan22','172.100.1.2','255.255.0.0','172.100.1.1',1);
+
+INSERT INTO vlan
+(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
+VALUES
+('vlan24','175.100.1.2','255.250.0.0','175.100.1.1',2);
+
+INSERT INTO vlan
+(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
+VALUES
+('vlan24','173.100.1.2','255.250.0.0','173.100.1.1',3);
+
+INSERT INTO vlan
+(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
+VALUES
+('vlan25','178.100.1.2','255.250.0.0','185.100.1.1',4);
+
+
+# Lieferant hinzufuegen
+
+INSERT INTO lieferant
+(name,fk_idAdresse)
+VALUES
+('Alltron AG',5);
+
+# Hersteller hinzufuegen
+INSERT INTO hersteller
+(name)
+VALUE
+('BenQ');
+
+# Lieferant_Hersteller hinzufuegen
+
+INSERT INTO lieferant_hersteller
+(fk_idLieferant,fk_idHersteller)
+VALUES
+(1,1);
 
 
 
