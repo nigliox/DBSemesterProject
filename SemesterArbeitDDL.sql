@@ -161,7 +161,7 @@ CREATE TABLE Person
 
 CREATE TABLE PoD_Kontaktperson
 (
-	fk_idPoD_Kontaktperson INT NOT NULL
+	fk_idPoD INT NOT NULL
     ,fk_idPerson INT NOT NULL
     ,priority TINYINT(4)
     ,FOREIGN KEY (fk_idPod_Kontaktperson)
@@ -319,11 +319,6 @@ CREATE TABLE Device_Admin
 );
 
 
-
-<<<<<<< HEAD
-=======
-
->>>>>>> d48ce9d840c8b3b883f773c875aa29d2d8e63cb0
 
 
 
