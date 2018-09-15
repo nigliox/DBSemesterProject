@@ -48,6 +48,26 @@ VALUES (@Flo_kunde, @AdresseFlo);
 INSERT INTO kunden_adresse (fk_idKunde,fk_idAdresse)
 VALUES (@Fer_kunde, @AdresseFer);
 
+# Lieferant hinzufuegen
+
+INSERT INTO lieferant
+(name,fk_idAdresse)
+VALUES
+('Alltron AG',5);
+
+# Hersteller hinzufuegen
+INSERT INTO hersteller
+(name)
+VALUE
+('BenQ');
+
+# Lieferant_Hersteller hinzufuegen
+
+INSERT INTO lieferant_hersteller
+(fk_idLieferant,fk_idHersteller)
+VALUES
+(1,1);
+
 
 #Platz für POD !!!!
 
@@ -93,6 +113,13 @@ INSERT INTO location
 (locationname,fk_idAdresse,fk_idPod)
 VALUES
 ('Abtwil',@AdresseFer,4);
+
+#Device Typ
+INSERT INTO Device_Typ (devicetype, beschreibung, isVirtual, fk_idLieferant, preis) 
+VALUE ('Router', 'WLAN-Router Xtra Fast', 0, 1, 199);
+
+INSERT INTO Device_Typ (devicetype, beschreibung, isVirtual, fk_idLieferant, preis) 
+VALUE ('Switch', 'Switch 8 Ports', 0, 1, 99);
 
 #Rechnung hinzufügen
 
@@ -223,29 +250,6 @@ INSERT INTO vlan
 VALUES
 ('vlan25','178.100.1.2','255.250.0.0','185.100.1.1',4);
 
-
-# Lieferant hinzufuegen
-
-INSERT INTO lieferant
-(name,fk_idAdresse)
-VALUES
-('Alltron AG',5);
-
-# Hersteller hinzufuegen
-INSERT INTO hersteller
-(name)
-VALUE
-('BenQ');
-
-# Lieferant_Hersteller hinzufuegen
-
-INSERT INTO lieferant_hersteller
-(fk_idLieferant,fk_idHersteller)
-VALUES
-(1,1);
-
-<<<<<<< HEAD
-=======
 #Admin_Cred_SNMP hinzufuegen
 INSERT INTO admin_cred_snmp
 (fk_admin_cred,fk_snmp)
@@ -263,6 +267,5 @@ INSERT INTO administrative_credentials
 (benutzer,passwort)
 VALUES 
 ('admin','Hallo2018!!');
->>>>>>> e681e22a23a1d4edf7cb0edd8f63575afb1fe949
 
 
