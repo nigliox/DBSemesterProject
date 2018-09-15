@@ -244,7 +244,5 @@ INSERT INTO lieferant_hersteller
 VALUES
 (1,1);
 
-#Admin_Cred_SNMP hinzufuegen
 
-in
 
