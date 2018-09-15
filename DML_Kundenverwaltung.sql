@@ -262,4 +262,25 @@ INSERT INTO administrative_credentials
 VALUES 
 ('admin','Hallo2018!!');
 
+#Netzwerkinterface hinzufuegen
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAddressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH0',1,1,1,'4h:89:78:98','1000','Lan',1);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAddressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH1',2,1,1,'4h:89:78:98','1000','Lan',2);
+
+#Netzwerkinterface_vlan hinzufuegen
+
+INSERT INTO netzwerkinterface_vlan
+(fk_idNetzwerkinterface,fk_idVlan)
+VALUES
+(1,1);
+
+
+
 
