@@ -109,23 +109,23 @@ INSERT INTO Rechnung (referenz, fk_idPOD, fk_idAdresse, rechnungsdatum)
 VALUES ("Ersatz Infrastruktur", 4, @AdresseFer, '2018-08-04');
 
 #Rechnungspositionen hinzufügen
-INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice)
-VALUES (1, 'Ersatzgerät', 1000, 1, 1);
+INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
+VALUES (1, 'Ersatzgerät', 1000, 1, 1,1);
+
+INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
+VALUES (2, 'Ersatzgerät', 1000, 2, 2,2);
+INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idLocation)
+VALUES (2, 'Dienstleistung', 1000,2);
+
+INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
+VALUES (3, 'Ersatzgerät', 1000, 3, 3,3);
+INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idLocation)
+VALUES (3, 'Dienstleistung', 2000,3);
 
 INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice)
-VALUES (2, 'Ersatzgerät', 1000, 2, 2);
-INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis)
-VALUES (2, 'Dienstleistung', 1000);
-
-INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice)
-VALUES (3, 'Ersatzgerät', 1000, 3, 3);
-INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis)
-VALUES (3, 'Dienstleistung', 2000);
-
-INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice)
-VALUES (4, 'Ersatzgerät', 1000, 4, 4);
-INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis)
-VALUES (4, 'Dienstleistung', 3000);
+VALUES (4, 'Ersatzgerät', 1000, 4, 4,4);
+INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis,fk_idLocation)
+VALUES (4, 'Dienstleistung', 3000,4);
 
 
 #Zahlung hinzufügen
