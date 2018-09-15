@@ -69,7 +69,7 @@ VALUES
 (1,1);
 
 
-#Platz für POD !!!!
+#PoD hinzufuegen
 
 INSERT INTO pod
 (timezone, fk_idKunde,name,domain,nameserver,sntpAddress)
@@ -121,6 +121,81 @@ VALUE ('Router', 'WLAN-Router Xtra Fast', 0, 1, 199);
 INSERT INTO Device_Typ (devicetype, beschreibung, isVirtual, fk_idLieferant, preis) 
 VALUE ('Switch', 'Switch 8 Ports', 0, 1, 99);
 
+#Device
+INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
+VALUES (1,"DFDSKSKGF",1,1,1);
+
+INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
+VALUES (1,"77889999s",1,1,1);
+
+
+#Netzwerkinterface hinzufuegen
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH0',1,1,1,'4h:89:78:98','1000','Lan',1);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH1',2,2,1,'4h:89:78:98','1000','Lan',2);
+
+#VLan hinzufuegen
+
+INSERT INTO vlan
+(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
+VALUES
+('vlan22','172.100.1.2','255.255.0.0','172.100.1.1',1);
+
+INSERT INTO vlan
+(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
+VALUES
+('vlan24','175.100.1.2','255.250.0.0','175.100.1.1',2);
+
+INSERT INTO vlan
+(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
+VALUES
+('vlan24','173.100.1.2','255.250.0.0','173.100.1.1',3);
+
+INSERT INTO vlan
+(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
+VALUES
+('vlan25','178.100.1.2','255.250.0.0','185.100.1.1',4);
+
+#SNMP Community hinzufuegen
+
+INSERT INTO snmp_community
+(name) VALUE ('DBCommunity');
+
+#Administrative Credentials hinzufuegen
+
+INSERT INTO administrative_credentials
+(benutzer,passwort)
+VALUES 
+('admin','Hallo2018!!');
+
+#Admin_Cred_SNMP hinzufuegen
+INSERT INTO admin_cred_snmp
+(fk_admin_cred,fk_snmp)
+VALUES
+(1,1);
+
+#Netzwerkinterface_vlan hinzufuegen Hilfstabell
+
+INSERT INTO netzwerkinterface_vlan
+(fk_idNetzwerkinterface,fk_idVlan)
+VALUES
+(1,1);
+
+# Device_Admin hinzufuegen Hilfstabell
+
+INSERT INTO device_admin
+(fk_idDevice,fk_idAdmin_Cred_SNMP)
+VALUES
+(1,1);
+
+
 #Rechnung hinzufügen
 
 INSERT INTO Rechnung (referenz, fk_idPOD, fk_idAdresse, rechnungsdatum)
@@ -132,8 +207,6 @@ VALUES ("Ersatz Infrastruktur", 2, @AdresseMarina, '2018-08-02');
 INSERT INTO Rechnung (referenz, fk_idPOD, fk_idAdresse, rechnungsdatum)
 VALUES ("Ersatz Infrastruktur", 3, @AdresseFlo, '2018-08-03');
 
-INSERT INTO Rechnung (referenz, fk_idPOD, fk_idAdresse, rechnungsdatum)
-VALUES ("Ersatz Infrastruktur", 4, @AdresseFer, '2018-08-04');
 
 #Rechnungspositionen hinzufügen
 INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
@@ -144,16 +217,8 @@ VALUES (2, 'Ersatzgerät', 1000, 2, 2,2);
 INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idLocation)
 VALUES (2, 'Dienstleistung', 1000,2);
 
-INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
-VALUES (3, 'Ersatzgerät', 1000, 3, 3,3);
 INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idLocation)
 VALUES (3, 'Dienstleistung', 2000,3);
-
-INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice)
-VALUES (4, 'Ersatzgerät', 1000, 4, 4,4);
-INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis,fk_idLocation)
-VALUES (4, 'Dienstleistung', 3000,4);
-
 
 #Zahlung hinzufügen
 
@@ -166,8 +231,6 @@ VALUES (@marina_kunde, 2000, '2018-09-02');
 INSERT INTO zahlung (fk_idkunde, betrag, zahlungsdatum)
 VALUES (@Flo_kunde, 3000, '2018-09-03');
 
-INSERT INTO zahlung (fk_idkunde, betrag, zahlungsdatum)
-VALUES (@Fer_kunde, 4000, '2018-09-04');
 
 #Zahlung mit Rechnung verbinden
 INSERT INTO Rechnung_Zahlung (fk_idZahlung, fk_idRechnung)
@@ -179,8 +242,6 @@ VALUES (2,2);
 INSERT INTO Rechnung_Zahlung (fk_idZahlung, fk_idRechnung)
 VALUES (3,3);
 
-INSERT INTO Rechnung_Zahlung (fk_idZahlung, fk_idRechnung)
-VALUES (4,4);
 
 
 
@@ -228,81 +289,10 @@ INSERT INTO pod_kontaktperson
 VALUES
 (4,1,10);
 
-#VLan hinzufuegen
-
-INSERT INTO vlan
-(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
-VALUES
-('vlan22','172.100.1.2','255.255.0.0','172.100.1.1',1);
-
-INSERT INTO vlan
-(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
-VALUES
-('vlan24','175.100.1.2','255.250.0.0','175.100.1.1',2);
-
-INSERT INTO vlan
-(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
-VALUES
-('vlan24','173.100.1.2','255.250.0.0','173.100.1.1',3);
-
-INSERT INTO vlan
-(bezeichnung,net_address,subnetmask,standard_gateway,fk_idLocation)
-VALUES
-('vlan25','178.100.1.2','255.250.0.0','185.100.1.1',4);
-
-#Admin_Cred_SNMP hinzufuegen
-INSERT INTO admin_cred_snmp
-(fk_admin_cred,fk_snmp)
-VALUES
-(1,1);
-
-#SNMP Community hinzufuegen
-
-INSERT INTO snmp_community
-(name) VALUE ('DBCommunity');
-
-#Administrative Credentials hinzufuegen
-
-INSERT INTO administrative_credentials
-(benutzer,passwort)
-VALUES 
-('admin','Hallo2018!!');
-
-#Netzwerkinterface hinzufuegen
-
-INSERT INTO netzwerkinterface
-(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAddressMac,bandwithMbit,medium, portNr)
-VALUES
-('ETH0',1,1,1,'4h:89:78:98','1000','Lan',1);
-
-INSERT INTO netzwerkinterface
-(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAddressMac,bandwithMbit,medium, portNr)
-VALUES
-('ETH1',2,1,1,'4h:89:78:98','1000','Lan',2);
-
-#Netzwerkinterface_vlan hinzufuegen Hilfstabell
-
-INSERT INTO netzwerkinterface_vlan
-(fk_idNetzwerkinterface,fk_idVlan)
-VALUES
-(1,1);
-
-# Device_Admin hinzufuegen Hilfstabell
-
-INSERT INTO device_admin
-(fk_idDevice,fk_idAdmin_Cred_SNMP)
-VALUES
-(1,1);
-
 # Log hinzufuegen
 
 INSERT INTO log
 (fk_idDevice,logMsg, severity,LoggingTime,checked,zeit)
 VALUES
-(1,'Error: Wrong Credentials',1,TIMESTAMP,0,TIME);
+(1,'Error: Wrong Credentials',1,timestamp(now()),0,TIME(now()));
 
-
-
-#Device
-INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
-VALUES (1,"DFDSKSKGF",1,1,1);
