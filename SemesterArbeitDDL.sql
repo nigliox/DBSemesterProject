@@ -70,6 +70,17 @@ CREATE TABLE Hersteller
     ,PRIMARY KEY (idHersteller)
 );
 
+CREATE TABLE Lieferant 
+(	
+	idLieferant INT NOT NULL AUTO_INCREMENT
+    , name VARCHAR(45)
+    ,fk_idAdresse INT NOT NULL
+    ,PRIMARY KEY (idLieferant)
+    ,FOREIGN KEY (fk_idAdresse)
+    REFERENCES Adresse (idAdresse)
+    ON UPDATE CASCADE
+);
+
 CREATE TABLE Device_Typ
 (
 	idDevice_Typ INT NOT NULL AUTO_INCREMENT
@@ -121,7 +132,7 @@ CREATE TABLE Administrative_Credentials
 (
 	idAdministrative_Credentials INT NOT NULL AUTO_INCREMENT
     ,benutzer VARCHAR(45)
-    ,passwort VARCHAR(45)
+    ,passwort VARCHAR(45) BINARY
     ,PRIMARY KEY (idAdministrative_Credentials)
     
 );
@@ -210,7 +221,7 @@ CREATE TABLE SNMP_Community
 (
 	idSNMP_Community INT NOT NULL AUTO_INCREMENT
     ,name VARCHAR(45)
-    ,PRIMARY KEY (idSNMP_Comunity)
+    ,PRIMARY KEY (idSNMP_Community)
 );
 
 CREATE TABLE Admin_Cred_SNMP
@@ -223,7 +234,7 @@ CREATE TABLE Admin_Cred_SNMP
     REFERENCES Administrative_Credentials (idAdministrative_Credentials)
     ON UPDATE CASCADE
     ,FOREIGN KEY (fk_SNMP)
-    REFERENCES SNMP_Community (idSNMP_Comunity)
+    REFERENCES SNMP_Community (idSNMP_Community)
     ON UPDATE CASCADE
 );
 
@@ -239,7 +250,7 @@ CREATE TABLE Rechnung
 		REFERENCES POD(idPOD)
         ON UPDATE CASCADE
 	,FOREIGN KEY (fk_idAdresse)
-		REFERENCES Adressse(idAdresse)
+		REFERENCES Adresse(idAdresse)
         ON UPDATE CASCADE
 );
 
@@ -280,16 +291,7 @@ CREATE TABLE Rechnung_Zahlung
         ON UPDATE CASCADE
 );
 
-CREATE TABLE Lieferant 
-(	
-	idLieferant INT NOT NULL AUTO_INCREMENT
-    , name VARCHAR(45)
-    ,fk_idAdresse INT NOT NULL
-    ,PRIMARY KEY (idLieferant)
-    ,FOREIGN KEY (fk_idAdresse)
-    REFERENCES Adresse (idAdresse)
-    ON UPDATE CASCADE
-);
+
 
 CREATE TABLE Lieferant_Hersteller
 (
@@ -318,6 +320,10 @@ CREATE TABLE Device_Admin
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d48ce9d840c8b3b883f773c875aa29d2d8e63cb0
 
 
 
