@@ -318,17 +318,6 @@ CREATE TABLE Device_Admin
 
 
 
-INSERT INTO kunde
-(idKunde,name)
-VALUES
-(kunde.idKunde,"hallo");
-
-SELECT* FROM kunde;
-
-DELETE FROM kunde
-WHERE idKunde = 2;
-
-
 
 
 
