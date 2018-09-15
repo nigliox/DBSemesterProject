@@ -320,8 +320,11 @@ CREATE TABLE Device_Admin
 
 
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 16b9a2fdc9bebbc37e85d86fc9448a373681c1ae
 
 
 
