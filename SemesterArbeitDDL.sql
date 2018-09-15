@@ -164,7 +164,7 @@ CREATE TABLE PoD_Kontaktperson
 	fk_idPoD INT NOT NULL
     ,fk_idPerson INT NOT NULL
     ,priority TINYINT(4)
-    ,FOREIGN KEY (fk_idPod_Kontaktperson)
+    ,FOREIGN KEY (fk_idPod)
     REFERENCES POD (idPOD)
     ON UPDATE CASCADE
     ,FOREIGN KEY (fk_idPerson)
@@ -320,11 +320,7 @@ CREATE TABLE Device_Admin
 
 
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 9850c98bc853b128c2adc8fc59522e7c00316099
 
 
 
