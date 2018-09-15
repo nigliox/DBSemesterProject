@@ -264,7 +264,5 @@ VALUES
 
 
 #Device
-set @idloc = (SELECT idLocation From location where idLocation = 1);
-set @devtype = (SELECT idDevice_Typ FROM device_typ WHERE  idDevice_Typ = 1);
-INSERT INTO device (fk_idLocation,seriennummer,hostname,fk_idDeviceType,isActive)
-VALUES (@idloc,"DFDSKSKGF","Foo",@devtype,1)
+INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
+VALUES (1,"DFDSKSKGF",1,1,1);
