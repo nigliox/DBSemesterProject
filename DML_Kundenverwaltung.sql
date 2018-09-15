@@ -280,13 +280,26 @@ INSERT INTO netzwerkinterface
 VALUES
 ('ETH1',2,1,1,'4h:89:78:98','1000','Lan',2);
 
-#Netzwerkinterface_vlan hinzufuegen
+#Netzwerkinterface_vlan hinzufuegen Hilfstabell
 
 INSERT INTO netzwerkinterface_vlan
 (fk_idNetzwerkinterface,fk_idVlan)
 VALUES
 (1,1);
 
+# Device_Admin hinzufuegen Hilfstabell
+
+INSERT INTO device_admin
+(fk_idDevice,fk_idAdmin_Cred_SNMP)
+VALUES
+(1,1);
+
+# Log hinzufuegen
+
+INSERT INTO log
+(fk_idDevice,logMsg, severity,LoggingTime,checked,zeit)
+VALUES
+(1,'Error: Wrong Credentials',1,TIMESTAMP,0,TIME);
 
 
 
