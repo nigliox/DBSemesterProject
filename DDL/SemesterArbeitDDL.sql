@@ -1,3 +1,4 @@
+DROP DATABASE inventarisierungslösung;
 CREATE DATABASE IF NOT EXISTS Inventarisierungslösung;
 
 USE Inventarisierungslösung;
@@ -6,6 +7,7 @@ CREATE TABLE Kunde
 (
 	idKunde INT AUTO_INCREMENT
     ,name VARCHAR(45) NOT NULL
+    ,maxBetrag DECIMAL(10,2) NOT NULL DEFAULT 0
     ,PRIMARY KEY (idKunde)
 );
 
@@ -88,7 +90,7 @@ CREATE TABLE Device_Typ
     ,deviceType VARCHAR(45)
     ,beschreibung VARCHAR(45)
     ,isVirtual TINYINT(4)
-    ,preis DECIMAL(4,0)
+    ,preis DECIMAL(10,2)
     ,PRIMARY KEY (idDevice_Typ)
     ,FOREIGN KEY (fk_idLieferant)
     REFERENCES Lieferant (idLieferant)
@@ -141,7 +143,7 @@ CREATE TABLE Zahlung
 (
 	idZahlung INT AUTO_INCREMENT
     ,fk_idKunde INT NOT NULL
-    ,betrag DECIMAL(4,0) NOT NULL
+    ,betrag DECIMAL(10,2) NOT NULL
     ,zahlungsdatum DATE NOT NULL
     ,PRIMARY KEY (idZahlung)
     ,FOREIGN KEY (fk_idKunde)
@@ -242,9 +244,11 @@ CREATE TABLE Rechnung
 (
 	idRechnung INT AUTO_INCREMENT
     ,referenz VARCHAR(45)
+    ,rechnungsdatum DATE NOT NULL
+    ,rechnungsbetrag DECIMAL(10,2) NOT NULL DEFAULT 0
+    ,offen BOOLEAN NOT NULL DEFAULT TRUE
     ,fk_idPOD INT NOT NULL
     ,fk_idAdresse INT NOT NULL
-    ,rechnungsdatum DATE NOT NULL
     ,PRIMARY KEY (idRechnung)
     ,FOREIGN KEY (fk_idPOD)
 		REFERENCES POD(idPOD)
@@ -257,9 +261,10 @@ CREATE TABLE Rechnung
 CREATE TABLE Rechnungsposition
 (
 	idRechnungsposition INT AUTO_INCREMENT
-    ,fk_idRechnung INT NOT NULL
+    ,fk_idRechnung INT
     ,beschreibung VARCHAR(45) NOT NULL
-    ,preis DECIMAL(4,0) NOT NULL
+    ,preis DECIMAL(10,2) NOT NULL
+    ,leistungsdatum DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     ,fk_idNetzwerkinterface INT
     ,fk_idDevice INT
     ,fk_idLocation INT NOT NULL
