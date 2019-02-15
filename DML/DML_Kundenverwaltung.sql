@@ -2,7 +2,7 @@ USE inventarisierungslösung;
 
 #Kunde hinzufuegen
 INSERT INTO kunde (name) VALUES ("Nik");
-INSERT INTO kunde (name) VALUES ("Marina");
+INSERT INTO kunde (name, maxbetrag) VALUES ("Marina",5000);
 INSERT INTO kunde (name) VALUES ("Flo");
 INSERT INTO kunde (name) VALUES ("Fer");
 
@@ -92,6 +92,11 @@ INSERT INTO pod
 VALUES
 ('Europa',@Fer_kunde,'TestPod4','test4.ch','8.8.8.9','84.102.99.101');
 
+INSERT INTO pod
+(timezone, fk_idKunde,name,domain,nameserver,sntpAddress)
+VALUES
+('Europa',@Marina_kunde,'TestPod5','test5.ch','8.8.8.9','84.102.99.101');
+
 # Location hinzufuegen
 
 INSERT INTO location
@@ -113,6 +118,12 @@ INSERT INTO location
 (locationname,fk_idAdresse,fk_idPod)
 VALUES
 ('Abtwil',@AdresseFer,4);
+
+INSERT INTO location
+(locationname,fk_idAdresse,fk_idPod)
+VALUES
+('Wil',@AdresseMarina,5);
+
 
 #Device Typ
 INSERT INTO Device_Typ (devicetype, beschreibung, isVirtual, fk_idLieferant, preis) 
@@ -219,17 +230,19 @@ INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_id
 VALUES ('Neues Gerät', 1500, 1, 1,1);
 
 INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
-VALUES ('Ersatzgerät', 1000, 2, 2,2);
+VALUES ('Ersatzgerät', -10000, 2, 2,2);
+
 INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
-VALUES ('Ersatzgerät', -2000, 2, 2,2);
-INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
-VALUES ('Rückgabe Ersatzgerät', -1500, 2, 2,2);
+VALUES ('Rückgabe Ersatzgerät', 1500, 2, 2,2);
 
 INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idLocation)
 VALUES (2, 'Dienstleistung', 1000,2);
 
 INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idLocation)
 VALUES (3, 'Dienstleistung', 2000,3);
+
+INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
+VALUES ('Ersatzgerät', 1000, 2, 2,5);
 
 #Zahlung hinzufügen
 

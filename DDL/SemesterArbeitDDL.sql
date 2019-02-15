@@ -3,6 +3,8 @@ CREATE DATABASE IF NOT EXISTS Inventarisierungslösung;
 
 USE Inventarisierungslösung;
 
+SET lc_time_names = 'de_CH';
+
 CREATE TABLE Kunde
 (
 	idKunde INT AUTO_INCREMENT

@@ -87,6 +87,10 @@ BEGIN
     DECLARE adresseID INT;
     DECLARE aktuelleRechnung INT;
     DECLARE aktuellerPOD INT;
+    DECLARE aktuelleLocation INT;
+    DECLARE aktuellerKunde INT;
+    DECLARE unverrechnetePositionen DECIMAL;
+    DECLARE offenerRechnungsbetrag DECIMAL;
       
     #Alle Rechnungspositionen, welche zum einer Location des gesuchten PODs gehören in Cursor deklarieren.
     DECLARE position CURSOR FOR
@@ -116,17 +120,36 @@ BEGIN
 				 
                 #aktuellen POD abrechnen
                 SET abzurechnenderPOD = aktuellerPOD;
-				#AdresseID für abzurechnenden PoD ausfindig machen
-				SET adresseID = (SELECT fk_idAdresse FROM Kunden_Adresse
+                #Aktueller Kunde
+                SET aktuellerKunde = (SELECT fk_idKunde FROM pod WHERE idPOD = abzurechnenderPOD);
+                #Aktuelle Location
+                SET aktuelleLocation = (SELECT fk_idLocation FROM rechnungsposition WHERE idRechnungsposition = aktuelleID);
+                #Variable für offene Posten dieses PODs
+                SET unverrechnetePositionen = (SELECT SUM(preis) FROM rechnungsposition WHERE fk_idRechnung IS NULL AND fk_idLocation =
+					(SELECT idLocation FROM Location WHERE fk_idPod = aktuellerPOD));
+                    
+                #Wenn offener Betrag > maxbetrag ODER am 28. ist offener Betrag > 1000 ODER Position ist älter als 3 Monate, dann erstelle Rechnung
+                IF unverrechnetePositionen > (SELECT maxbetrag FROM kunde WHERE idKunde = aktuellerKunde)
+					OR (dayofmonth(current_date()) > 27 AND unverrechnetePositionen > 1000)
+                    OR Datediff((SELECT leistungsdatum FROM rechnungsposition WHERE fk_idLocation = aktuelleLocation), current_date()) > 90
+				THEN
+					#AdresseID für abzurechnenden PoD ausfindig machen
+					SET adresseID = (SELECT fk_idAdresse FROM Kunden_Adresse
 						WHERE fk_idKunde = (SELECT fk_idKunde FROM pod WHERE idPOD = abzurechnenderPOD LIMIT 1));
 					
-				#Erstelle eine Rechnung
-				INSERT INTO Rechnung (referenz, fk_idPOD, fk_idAdresse, rechnungsdatum)
+					#Erstelle eine Rechnung
+					INSERT INTO Rechnung (referenz, fk_idPOD, fk_idAdresse, rechnungsdatum)
 						VALUES (CONCAT("Abrechung ",monthname(CURRENT_DATE())), abzurechnenderPOD, adresseID, current_date());
-				SET aktuelleRechnung = last_insert_id();
+					SET aktuelleRechnung = last_insert_id();
+				ELSE IF (SELECT fk_idKunde FROM Rechnung WHERE idRechnung = aktuelleRechnung) = aktuellerKunde
+					THEN SET aktuellerKunde = (SELECT fk_idKunde FROM pod WHERE idPOD = abzurechnenderPOD);
+                ELSE
+					ITERATE proc;
+				END IF;
 			END IF;
-		
-					
+            
+		END IF;
+        
 		#Füge die Rechnungsnummer zu allen Rechnungspositionen hinzu.
 		UPDATE Rechnungsposition
 			SET fk_idRechnung = aktuelleRechnung
@@ -135,14 +158,19 @@ BEGIN
 		UPDATE Rechnung
 			SET rechnungsbetrag = rechnungsbetrag + (SELECT preis FROM rechnungsposition WHERE idRechnungsposition = aktuelleID)
 			WHERE idRechnung = aktuelleRechnung;
+                
             
-		-- #Berücksichtige Guthaben (falls Summe aller offenen Rechnungen negativ)
--- 			SET offenerRechnungsbetrag = (SELECT SUM(rechnungsbetrag) FROM Rechnung WHERE fk_idAdresse = adresseID AND offen = TRUE);
--- 			IF offenerRechnungsbetrag < 0 THEN
--- 				UPDATE Rechnung
--- 				SET rechnungsbetrag = rechnungsbetrag + offenerRechnungsbetrag
--- 					WHERE idRechnung = aktuelleRechnung;
--- 			END IF;    
+		#Berücksichtige Guthaben (falls Summe aller offenen Rechnungen negativ)
+		SET offenerRechnungsbetrag = (SELECT SUM(rechnungsbetrag) FROM Rechnung WHERE fk_idAdresse = adresseID AND offen = TRUE);
+		IF offenerRechnungsbetrag < 0 THEN
+			UPDATE Rechnung
+			SET rechnungsbetrag = rechnungsbetrag + offenerRechnungsbetrag
+			WHERE idRechnung = aktuelleRechnung;
+            
+            UPDATE Rechnung
+            SET offen = false WHERE fk_idAdresse = adresseID;
+		END IF;
+			  
             
 	END LOOP Proc;
     CLOSE position;
@@ -152,7 +180,7 @@ BEGIN
 END//
 DELIMITER ;
 
-SET GLOBAL event_scheduler = ON;
+SET GLOBAL event_scheduler = OFF;
 
 #Event: Löst täglich die Stored Procedure PodBillauto für die automatische Rechnungsstellung aus.
 CREATE EVENT event_fakturierung_taeglich
