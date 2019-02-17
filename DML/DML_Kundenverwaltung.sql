@@ -221,16 +221,16 @@ VALUES ("Ersatz Infrastruktur", 3, @AdresseFlo, '2018-08-03');
 
 #Rechnungspositionen hinzufügen
 INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
-VALUES ('Ersatzgerät', 1000, 1, 1,1);
+VALUES ('Ersatzgerät', 3000, 1, 1,1);
 
 INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
-VALUES ('Rückgabe Ersatzgerät', -1000, 1, 1,1);
+VALUES ('Rückgabe Ersatzgerät', 2000, 1, 1,1);
 
 INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
 VALUES ('Neues Gerät', 1500, 1, 1,1);
 
 INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
-VALUES ('Ersatzgerät', -10000, 2, 2,2);
+VALUES ('Ersatzgerät', 1000, 2, 2,2);
 
 INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
 VALUES ('Rückgabe Ersatzgerät', 1500, 2, 2,2);
@@ -240,9 +240,6 @@ VALUES (2, 'Dienstleistung', 1000,2);
 
 INSERT INTO Rechnungsposition(fk_idRechnung, beschreibung, preis, fk_idLocation)
 VALUES (3, 'Dienstleistung', 2000,3);
-
-INSERT INTO Rechnungsposition(beschreibung, preis, fk_idNetzwerkinterface, fk_idDevice, fk_idLocation)
-VALUES ('Ersatzgerät', 1000, 2, 2,5);
 
 #Zahlung hinzufügen
 
