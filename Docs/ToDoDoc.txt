@@ -1,0 +1,7 @@
+- Finden von freien Neztwerkinterfaces im Device (das isch echt schräg)
+
+- logging 
+
+- schnittstelle zu bestehendem GeräteManagement Werkzeug
+
+- berechtigungen setzen dokumentation fertig
