@@ -102,22 +102,22 @@ VALUES
 INSERT INTO location
 (locationname,fk_idAdresse,fk_idPod)
 VALUES
-('Genf',@AdresseNik,1);
+('NikGmbH',@AdresseNik,1);
 
 INSERT INTO location
 (locationname,fk_idAdresse,fk_idPod)
 VALUES
-('St.Gallen',@AdresseMarina,2);
+('MarinaGmbh',@AdresseMarina,2);
 
 INSERT INTO location
 (locationname,fk_idAdresse,fk_idPod)
 VALUES
-('Herisau',@AdresseFlo,3);
+('FloGmbh',@AdresseFlo,3);
 
 INSERT INTO location
 (locationname,fk_idAdresse,fk_idPod)
 VALUES
-('Abtwil',@AdresseFer,4);
+('FerGmbh',@AdresseFer,4);
 
 INSERT INTO location
 (locationname,fk_idAdresse,fk_idPod)
@@ -126,18 +126,47 @@ VALUES
 
 
 #Device Typ
-INSERT INTO Device_Typ (devicetype, beschreibung, isVirtual, fk_idLieferant, preis) 
-VALUE ('Router', 'WLAN-Router Xtra Fast', 0, 1, 199);
+INSERT INTO Device_Typ (devicetype, beschreibung,anzahlPorts, isVirtual, fk_idLieferant, preis) 
+VALUE ('Router', 'WLAN-Router Xtra Fast', 5, 0, 1, 199);
 
-INSERT INTO Device_Typ (devicetype, beschreibung, isVirtual, fk_idLieferant, preis) 
-VALUE ('Switch', 'Switch 8 Ports', 0, 1, 99);
+INSERT INTO Device_Typ (devicetype, beschreibung,anzahlPorts, isVirtual, fk_idLieferant, preis) 
+VALUE ('Router', 'WLAN-Router Netgear', 5, 0, 1, 129);
+
+INSERT INTO Device_Typ (devicetype, beschreibung,anzahlPorts, isVirtual, fk_idLieferant, preis) 
+VALUE ('Router', 'WLAN-Router Cisco', 5, 0, 1, 199);
+
+INSERT INTO Device_Typ (devicetype, beschreibung,anzahlPorts, isVirtual, fk_idLieferant, preis) 
+VALUE ('Switch', 'Switch 8 Ports',8, 0, 1, 99);
+
+INSERT INTO Device_Typ (devicetype, beschreibung,anzahlPorts, isVirtual, fk_idLieferant, preis) 
+VALUE ('Switch', 'Switch 10 Ports',10, 0, 1, 109);
+
+INSERT INTO Device_Typ (devicetype, beschreibung,anzahlPorts, isVirtual, fk_idLieferant, preis) 
+VALUE ('Switch', 'Switch 52 Ports',52, 0, 1, 799);
 
 #Device
 INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
-VALUES (1,"DFDSKSKGF",1,1,1);
+VALUES (1,"DFDSKSKGF","xtraFast",1,1);
 
 INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
-VALUES (1,"77889999s",1,1,1);
+VALUES (1,"77889999s","newSwitch",4,1);
+
+INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
+VALUES (2,"7899s","router",1,1);
+
+INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
+VALUES (2,"778833399s","newSwi",4,1);
+
+INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
+VALUES (3,"99109s","help",4,1);
+
+INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
+VALUES (3,"1111s","default",5,1);
+
+
+INSERT INTO device (fk_idLocation, serienummer,hostname,fk_idDeviceType,isActive)
+VALUES (4,"2222s","BigSwitch",6,1);
+
 
 
 #Netzwerkinterface hinzufuegen
@@ -145,12 +174,114 @@ VALUES (1,"77889999s",1,1,1);
 INSERT INTO netzwerkinterface
 (interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
 VALUES
-('ETH0',1,1,1,'4h:89:78:98','1000','Lan',1);
+('ETH1',1,1,2,'4h:89:78:98','1000','Lan',1);
 
 INSERT INTO netzwerkinterface
 (interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
 VALUES
-('ETH1',2,2,1,'4h:89:78:98','1000','Lan',2);
+('ETH2',1,1,2,'4h:89:78:98','1000','Lan',2);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH3',1,1,2,'4h:89:78:98','1000','Lan',3);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH1',2,1,2,'4h:89:78:98','1000','Lan',1);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH2',2,1,2,'4h:89:78:98','1000','Lan',2);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH3',2,1,2,'4h:89:78:98','1000','Lan',3);
+
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH4',2,1,2,'4h:89:78:98','1000','Lan',4);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH1',3,1,2,'4h:89:78:98','1000','Lan',1);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH4',3,1,2,'4h:89:78:98','1000','Lan',1);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH1',4,1,2,'4h:89:78:98','1000','Lan',1);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH2',4,1,2,'4h:89:78:98','1000','Lan',2);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH1',5,2,2,'4h:89:88:98','1000','Lan',1);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH2',5,2,2,'4h:89:88:98','1000','Lan',2);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH3',5,2,2,'4h:89:88:98','1000','Lan',3);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH4',5,2,2,'4h:89:88:98','1000','Lan',4);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH5',5,2,2,'4h:89:88:98','1000','Lan',5);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH6',5,2,2,'4h:89:88:98','1000','Lan',6);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH7',5,2,2,'4h:89:88:98','1000','Lan',7);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH8',5,2,2,'4h:89:88:98','1000','Lan',8);
+
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH1',7,2,2,'4h:89:88:98','1000','Lan',1);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH2',7,2,2,'4h:89:88:98','1000','Lan',2);
+
+INSERT INTO netzwerkinterface
+(interfaceName, fk_idDevice, isFullDuplex,isVirtual,physicalAdressMac,bandwithMbit,medium, portNr)
+VALUES
+('ETH3',7,2,2,'4h:89:88:98','1000','Lan',3);
 
 #VLan hinzufuegen
 

@@ -1,4 +1,4 @@
-DROP DATABASE inventarisierungslösung;
+DROP DATABASE if EXISTS inventarisierungslösung;
 CREATE DATABASE IF NOT EXISTS Inventarisierungslösung;
 
 USE Inventarisierungslösung;
@@ -91,6 +91,7 @@ CREATE TABLE Device_Typ
     ,fk_idLieferant INT NOT NULL
     ,deviceType VARCHAR(45)
     ,beschreibung VARCHAR(45)
+	,anzahlPorts INT
     ,isVirtual TINYINT(4)
     ,preis DECIMAL(10,2)
     ,PRIMARY KEY (idDevice_Typ)
