@@ -41,3 +41,18 @@ INNER JOIN netzwerkinterface nt ON nt.fk_idDevice = d.idDevice
 INNER JOIN location l ON d.fk_idLocation = l.idLocation
 INNER JOIN adresse a ON a.idAdresse = l.fk_idAdresse
 GROUP BY idDevice;
+
+# view for getting information about logentries with pod data
+
+DROP VIEW IF EXISTS v_logentries;
+
+CREATE VIEW  v_logentries as
+SELECT idLog as id, name as pod, locationName as location, hostname as hostname ,severity,zeit as timestamp ,logMsg as message
+
+from device d 
+INNER JOIN log lg ON d.idDevice = lg.fk_idDevice
+INNER JOIN location l ON l.idLocation = d.fk_idLocation
+INNER JOIN pod pd ON pd.idPOD = l.fk_idPOD
+WHERE checked = 0;
+;
+

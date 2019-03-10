@@ -448,3 +448,17 @@ INSERT INTO log
 VALUES
 ('Error: Wrong Credentials',1,timestamp(now()),0,TIME(now()),1);
 
+INSERT INTO log
+(logMsg, severity,LoggingTime,checked,zeit,fk_idDevice)
+VALUES
+('Error: PowerSupply',1,timestamp(now()),0,TIME(now()),2);
+
+INSERT INTO log
+(logMsg, severity,LoggingTime,checked,zeit,fk_idDevice)
+VALUES
+('Error: Hirn Defekt',1,timestamp(now()),0,TIME(now()),3);
+
+INSERT INTO log
+(logMsg, severity,LoggingTime,checked,zeit,fk_idDevice)
+VALUES
+('Error: Update ',1,timestamp(now()),1,TIME(now()),3);
