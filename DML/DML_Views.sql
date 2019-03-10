@@ -1,6 +1,7 @@
 use inventarisierungslösung;
 
 # view for getting informations about the usage in percent perLocation
+DROP VIEW IF EXISTS v_UsagePerLocation;
 CREATE VIEW v_UsagePerLocation as
 
 SELECT idLocation,locationName,strasse,hausnummer,plz,ort,land,idDevice,idDevice_Typ,beschreibung, count(idDevice) as belegtePorts, anzahlPorts, (count(idDevice)/anzahlPorts * 100) as usageInPercent
@@ -14,6 +15,7 @@ GROUP BY idDevice;
 
 
 # view for getting informations about the usage in percent perPod
+DROP VIEW IF exists v_usagePerPod;
 CREATE VIEW v_usagePerPod as
 SELECT idPOD,idLocation,locationName,strasse,hausnummer,plz,ort,land,idDevice,idDevice_Typ,beschreibung,count(idDevice) as belegtePorts, sum(DISTINCT anzahlPorts) as anzahlPorts, (count(idDevice)/sum(DISTINCT anzahlPorts) * 100) as usageInPercent
 
@@ -27,4 +29,6 @@ GROUP BY idPOD;
 
 # view for getting information about free ports and speed options on networkinterfaces
 
-SELECT locationName, Hostname, Portnu
+select * from v_usageperlocation; 
+
+select * from v_usageperpod;
