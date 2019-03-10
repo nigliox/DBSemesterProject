@@ -100,26 +100,12 @@ CREATE TABLE Device_Typ
     ON UPDATE CASCADE
 );
 
-CREATE TABLE Log
-(
-	idLog INT NOT NULL AUTO_INCREMENT
-    ,logMsg VARCHAR(255) NOT NULL
-    ,severity TINYINT(4)
-    ,loggingTime DATETIME NOT NULL
-    ,checked TINYINT(4) 
-    ,zeit TIMESTAMP(1) NOT NULL
-    ,LogCol VARCHAR(45)
-    ,idDevice int
-	,PRIMARY KEY (idLog)
-    
-);
 
 CREATE TABLE Device
 ( 
 	idDevice INT NOT NULL AUTO_INCREMENT
     ,fk_idLocation INT NOT NULL
     ,fk_idDeviceType INT NOT NULL
-    ,fk_idLog INT 
     ,serienummer VARCHAR(45)
     ,hostname VARCHAR(45)
     ,isActive TINYINT(4)
@@ -130,11 +116,24 @@ CREATE TABLE Device
     ,FOREIGN KEY (fk_idDeviceType)
     REFERENCES Device_Typ (idDevice_Typ)
     ON UPDATE CASCADE
-    ,FOREIGN KEY (fk_idLog)
-    REFERENCES log (idLog)
-    ON UPDATE CASCADE
+
 );
 
+CREATE TABLE Log
+(
+	idLog INT NOT NULL AUTO_INCREMENT
+    ,logMsg VARCHAR(255) NOT NULL
+    ,severity TINYINT(4)
+    ,loggingTime DATETIME NOT NULL
+    ,checked TINYINT(4) 
+    ,zeit TIMESTAMP(1) NOT NULL
+    ,LogCol VARCHAR(45)
+    ,fk_idDevice int
+	,PRIMARY KEY (idLog)
+    ,FOREIGN KEY (fk_idDevice)
+    REFERENCES Device (idDevice)
+
+);
 
 
 CREATE TABLE Administrative_Credentials

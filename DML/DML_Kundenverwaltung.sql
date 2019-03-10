@@ -444,7 +444,7 @@ VALUES
 # Log hinzufuegen
 
 INSERT INTO log
-(idDevice,logMsg, severity,LoggingTime,checked,zeit)
+(logMsg, severity,LoggingTime,checked,zeit,fk_idDevice)
 VALUES
-(1,'Error: Wrong Credentials',1,timestamp(now()),0,TIME(now()));
+('Error: Wrong Credentials',1,timestamp(now()),0,TIME(now()),1);
 
