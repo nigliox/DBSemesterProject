@@ -22,7 +22,7 @@ call writeLog((select idDevice from device LIMIT 1),"Test LOG",1,1,"Kei Ahnig",N
 -- create store proc to clear checked/marked log monitoring tool entries
 use inventarisierungslösung;
 DELIMITER //
-CREATE PROCEDURE logClear
+CREATE PROCEDURE proc01
 (
 	IN id int
 )
@@ -30,6 +30,6 @@ BEGIN
 	UPDATE log
 	SET checked = 1
 	WHERE idLog = id;
-END
+END //
 DELIMITER ;
-call logClear(2);
+call proc01(2);
