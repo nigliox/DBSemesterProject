@@ -13,7 +13,6 @@ create user 'monitoring' identified by 'password';
 -- grant permissions for created user
 grant all privileges on inventarisierungslösung.* to 'boss' with grant option;
 
-show grants for'boss';
 
 grant insert on inventarisierungslösung.pod to 'abteilungsleiter' with grant option;
 grant insert on inventarisierungslösung.location to 'abteilungsleiter' with grant option;

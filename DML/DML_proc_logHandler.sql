@@ -31,10 +31,4 @@ BEGIN
 	WHERE idLog = id;
 END //
 DELIMITER ;
-<<<<<<< HEAD
-call proc01(2);
-=======
 
-
-
->>>>>>> ed0bf4967083db61652d2bf29402bfebabe8217d
