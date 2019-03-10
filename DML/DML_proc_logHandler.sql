@@ -16,11 +16,10 @@ BEGIN
     VALUES(logMsg, severity, loggingTime, checked, zeit, LogCol,idDevice);
 END //
 DELIMITER ;
-call writeLog((select idDevice from device LIMIT 1),"Test LOG",1,1,"Kei Ahnig",NOW(),NOW());
+call writeLog((select idDevice from device LIMIT 1),"Test LOG",1,0,"Kei Ahnig",NOW(),NOW());
 
 
 -- create store proc to clear checked/marked log monitoring tool entries
-use inventarisierungslösung;
 DELIMITER //
 CREATE PROCEDURE logClear
 (
@@ -30,6 +29,8 @@ BEGIN
 	UPDATE log
 	SET checked = 1
 	WHERE idLog = id;
-END
+END //
 DELIMITER ;
-call logClear(2);
+
+
+
