@@ -135,7 +135,6 @@ CREATE TABLE Log
 
 );
 
-
 CREATE TABLE Administrative_Credentials
 (
 	idAdministrative_Credentials INT NOT NULL AUTO_INCREMENT
