@@ -1,7 +1,3 @@
-- Finden von freien Neztwerkinterfaces im Device (das isch echt schräg)
+Florian Gämperle 
 
-- logging 
-
-- schnittstelle zu bestehendem GeräteManagement Werkzeug
-
-- berechtigungen setzen dokumentation fertig
+- Berechtigungen setzen wie in der Aufgabenstellung genannt. 
