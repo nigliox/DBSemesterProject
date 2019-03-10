@@ -29,6 +29,15 @@ GROUP BY idPOD;
 
 # view for getting information about free ports and speed options on networkinterfaces
 
-select * from v_usageperlocation; 
+DROP VIEW IF EXISTS v_FreeNetInterfacesPerDevice;
 
-select * from v_usageperpod;
+CREATE VIEW v_FreeNetInterfacesPerDevice as
+
+SELECT idLocation,locationName,idDevice,hostname, anzahlPorts - count(idDevice)  as freiePorts, bandwithMbit,medium,isFullDuplex
+
+from device d 
+INNER JOIN device_typ dt ON d.fk_idDeviceType = dt.idDevice_Typ	
+INNER JOIN netzwerkinterface nt ON nt.fk_idDevice = d.idDevice
+INNER JOIN location l ON d.fk_idLocation = l.idLocation
+INNER JOIN adresse a ON a.idAdresse = l.fk_idAdresse
+GROUP BY idDevice;
