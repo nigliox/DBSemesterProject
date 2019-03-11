@@ -1,3 +1,2 @@
-Florian Gämperle 
-
-- Berechtigungen setzen wie in der Aufgabenstellung genannt. 
+- Dokumentationscheck
+- Arbeitsjournale nachtragen

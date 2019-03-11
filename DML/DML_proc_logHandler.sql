@@ -15,9 +15,6 @@ BEGIN
 	INSERT INTO log (logMsg, severity, loggingTime, checked, zeit, LogCol,idDevice)
     VALUES(logMsg, severity, loggingTime, checked, zeit, LogCol,idDevice);
 END //
-DELIMITER ;
-call writeLog((select idDevice from device LIMIT 1),"Test LOG",1,0,"Kei Ahnig",NOW(),NOW());
-
 
 -- create store proc to clear checked/marked log monitoring tool entries
 DELIMITER //
